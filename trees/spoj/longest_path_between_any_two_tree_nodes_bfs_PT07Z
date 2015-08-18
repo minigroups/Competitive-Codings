@@ -6,6 +6,7 @@ using namespace std;
 int visit[99999],level[99999];
 int maxx=0,maxn;
 vector<int> v[99999];
+///we can finbd with one dfs or two bfs
 void bfs(int root){
 	
 	queue<int> q;
