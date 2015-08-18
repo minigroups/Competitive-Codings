@@ -1,0 +1,60 @@
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <string.h>
+using namespace std;
+int visit[99999],level[99999];
+int maxx=0,maxn;
+vector<int> v[99999];
+void bfs(int root){
+	
+	queue<int> q;
+	q.push(root);
+	
+	int tmp=root;
+	level[tmp]=0;
+	visit[tmp]=1;
+	
+	while(!q.empty()){
+		tmp=q.front();
+		
+		q.pop();
+		for(int i=0;i<v[tmp].size();i++){
+			
+			if(!visit[v[tmp][i]]){
+				q.push(v[tmp][i]);
+				visit[v[tmp][i]]=1;
+				level[v[tmp][i]]=level[tmp]+1;
+			}
+						
+		}
+		
+		if(maxx<=level[tmp]){
+			maxx=level[tmp];maxn=tmp;
+			
+		}
+	}
+	
+	
+	
+	
+}
+int main() {
+	// your code goes here
+	int n,tmp,tmp1;
+	cin>>n;
+	for(int i=1;i<=n;i++){
+		cin>>tmp>>tmp1;
+		v[tmp].push_back(tmp1);
+		v[tmp1].push_back(tmp);
+	}
+	
+	bfs(1);
+	memset(visit,0,sizeof(visit));
+	memset(level,0,sizeof(level));
+	maxx=0;
+	bfs(maxn);
+	cout<<maxx<<endl;
+	
+	return 0;
+}
